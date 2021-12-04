@@ -4,6 +4,7 @@
 # Create n objects of the manager class and display the details of the manager having the maximum total salary (salary+bonus).
 
 class employee:
+    elist = list()
     def __init__(self,id, name, department, salary):
         self.id = id
         self.name = name
@@ -11,6 +12,8 @@ class employee:
         self.salary = salary
         self.bonus = 0
         self.bonusPercent = 15
+
+        employee.elist.append(self)
 
     def calcBonus(self):
         self.bonus = (float(self.salary) * (self.bonusPercent/100))
@@ -21,7 +24,7 @@ class employee:
             print("no bonus is given to the employee")
         else:
             print("the bonus of the employee is : " , self.bonus)
-            tsal = (self.salary + self.bonus)
+            tsal = (float(self.salary) + float(self.bonus))
             print("and the total salary is : ", tsal)
     
     def display(self):
@@ -56,12 +59,10 @@ while True:
 highestBonus = 0
 listIndex = None
 
-for i in range(len(lst)):
-    lst[i].calcBonus()
-    if lst[i].bonus > highestBonus:
+for i in employee.elist:
+    i.calcBonus()
+    if i.bonus > highestBonus:
         listIndex = i
 
-lst[listIndex].display()
-
-
+listIndex.display()
 
